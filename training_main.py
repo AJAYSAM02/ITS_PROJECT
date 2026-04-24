@@ -15,7 +15,6 @@ from utils import import_train_configuration, set_sumo, set_train_path
 
 
 if __name__ == "__main__":
-    # from tensorflow.python.client import device_lib
 
     gpus = tf.config.list_physical_devices('GPU')
     print("###################")
@@ -75,8 +74,8 @@ if __name__ == "__main__":
     
     while episode < config['total_episodes']:
         print('\n----- Episode', str(episode+1), 'of', str(config['total_episodes']))
-        epsilon = 1.0 - (episode / config['total_episodes'])  # set the epsilon for this episode according to epsilon-greedy policy
-        simulation_time, training_time = Simulation.run(episode, epsilon)  # run the simulation
+        epsilon = 1.0 - (episode / config['total_episodes'])
+        simulation_time, training_time = Simulation.run(episode, epsilon)
         print('Simulation time:', simulation_time, 's - Training time:', training_time, 's - Total:', round(simulation_time+training_time, 1), 's')
         episode += 1
 

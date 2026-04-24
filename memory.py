@@ -10,7 +10,7 @@ class Memory:
     def add_sample(self, sample):
         self._samples.append(sample)
         if self._size_now() > self._size_max:
-            self._samples.pop(0)  # if the length is greater than the size of memory, remove the oldest element
+            self._samples.pop(0)
 
 
     def get_samples(self, n):
@@ -18,9 +18,9 @@ class Memory:
             return []
 
         if n > self._size_now():
-            return random.sample(self._samples, self._size_now())  # get all the samples
+            return random.sample(self._samples, self._size_now()) 
         else:
-            return random.sample(self._samples, n)  # get "batch size" number of samples
+            return random.sample(self._samples, n)  
 
 
     def _size_now(self):

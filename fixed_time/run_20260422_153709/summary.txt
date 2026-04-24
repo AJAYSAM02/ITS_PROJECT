@@ -1,0 +1,4 @@
+Average queue length: 0.522
+Total waiting time: 2821
+Total reward: 0.0
+Simulation time: 6.0 s

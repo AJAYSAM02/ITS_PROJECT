@@ -52,25 +52,39 @@ def import_test_configuration(config_file):
     config['model_to_test'] = content['dir'].getint('model_to_test') 
     return config
 
+def import_fixed_time_configuration(config_file):
+    """
+    Read the config file for fixed-time simulation and import its content
+    """
+    content = configparser.ConfigParser()
+    content.read(config_file)
+    config = {}
+    config['gui'] = content['simulation'].getboolean('gui')
+    config['max_steps'] = content['simulation'].getint('max_steps')
+    config['n_cars_generated'] = content['simulation'].getint('n_cars_generated')
+    config['episode_seed'] = content['simulation'].getint('episode_seed')
+    config['green_duration'] = content['simulation'].getint('green_duration')
+    config['yellow_duration'] = content['simulation'].getint('yellow_duration')
+    config['sumocfg_file_name'] = content['dir']['sumocfg_file_name']
+    config['output_path_name'] = content['dir']['output_path_name']
+    return config
+
 
 def set_sumo(gui, sumocfg_file_name, max_steps):
     """
     Configure various parameters of SUMO
     """
-    # sumo things - we need to import python modules from the $SUMO_HOME/tools directory
     if 'SUMO_HOME' in os.environ:
         tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
         sys.path.append(tools)
     else:
         sys.exit("please declare environment variable 'SUMO_HOME'")
-
-    # setting the cmd mode or the visual mode    
+ 
     if gui == False:
         sumoBinary = checkBinary('sumo')
     else:
         sumoBinary = checkBinary('sumo-gui')
- 
-    # setting the cmd command to run sumo at simulation time
+
     sumo_cmd = [sumoBinary, "-c", os.path.join('intersection', sumocfg_file_name), "--no-step-log", "true", "--waiting-time-memory", str(max_steps)]
 
     return sumo_cmd

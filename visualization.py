@@ -14,7 +14,7 @@ class Visualization:
         min_val = min(data)
         max_val = max(data)
 
-        plt.rcParams.update({'font.size': 24})  # set bigger font size
+        plt.rcParams.update({'font.size': 24})
 
         plt.plot(data)
         plt.ylabel(ylabel)

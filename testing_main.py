@@ -44,10 +44,15 @@ if __name__ == "__main__":
     )
 
     print('\n----- Test episode')
-    simulation_time = Simulation.run(config['episode_seed'])  # run the simulation
+    simulation_time = Simulation.run(config['episode_seed'])
+
+    print('\n----- Run summary -----')
+    print('Average queue length:', round(Simulation.avg_queue_length, 3))
+    print('Total waiting time:', round(Simulation.total_waiting_time, 3))
+    print('Total reward:', round(Simulation.total_reward, 3))
     print('Simulation time:', simulation_time, 's')
 
-    print("----- Testing info saved at:", plot_path)
+    print("\n----- Testing info saved at:", plot_path)
 
     copyfile(src='testing_settings.ini', dst=os.path.join(plot_path, 'testing_settings.ini'))
 
